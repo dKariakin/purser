@@ -1,0 +1,7 @@
+coverage:
+  status:
+    project: true
+  # Ignore mocks and test files when calculating test coverage
+  ignore:
+    - "**/mocks/**"
+    - "**_test.go"

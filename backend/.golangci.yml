@@ -1,0 +1,37 @@
+version: '2'
+
+formatters:
+  enable:
+    - gofmt
+    - goimports
+
+linters:
+  enable:
+    - staticcheck
+    - contextcheck
+    - copyloopvar
+    - depguard
+    - cyclop
+    - gocognit
+    - errchkjson
+    - gocheckcompilerdirectives
+    - gochecknoglobals
+    - gochecknoinits
+    - nestif
+    - mnd
+    - nonamedreturns
+    - paralleltest
+    - tagalign
+    - unused
+    - unconvert
+    - unparam
+    - whitespace
+    - tparallel
+
+  settings:
+    depguard:
+      rules:
+        main:
+          list-mode: lax
+          allow:
+            - github.com/dKariakin/purser
