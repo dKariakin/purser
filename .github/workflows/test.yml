@@ -24,6 +24,7 @@ jobs:
         with:
           version: v2.1
           install-mode: 'goinstall'
+          working-directory: 'backend'
       - name: Run security analysis
         uses: securego/gosec@master
         with:
