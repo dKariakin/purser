@@ -2,7 +2,7 @@ package create
 
 import (
 	"context"
-	"fmt"
+	"errors"
 	"net/http"
 	"strings"
 	"time"
@@ -27,13 +27,17 @@ func New(svc Service, t time.Duration) *NewExpenseHandler {
 
 // CreateExpense handles request of creating a new expense
 func (handler *NewExpenseHandler) CreateExpense(ctx echo.Context) error {
-	request := dto.CreateExpenseRequest{}
-	if err := ctx.Bind(request); err != nil {
-		return ctx.JSON(http.StatusBadRequest, `{"error": "MalformedRequest"}`) // Add error handler for such cases
+	request := &dto.CreateExpenseRequest{}
+	if ctx.Request().Header.Get("Content-Type") != "application/json" {
+		return ctx.JSON(http.StatusBadRequest, dto.NewError(error_codes.IncorrectContentType.String()))
 	}
 
-	if err := handler.validateRequest(request); err != nil {
-		return ctx.JSON(http.StatusBadRequest, `{}`)
+	if err := ctx.Bind(request); err != nil {
+		return ctx.JSON(http.StatusBadRequest, dto.NewError(error_codes.MalformedRequest.String()))
+	}
+
+	if err := handler.validateRequest(request); err.Errors != nil {
+		return ctx.JSON(http.StatusBadRequest, err)
 	}
 
 	internalCtx, cancel := context.WithTimeout(context.Background(), handler.timeout)
@@ -41,21 +45,25 @@ func (handler *NewExpenseHandler) CreateExpense(ctx echo.Context) error {
 
 	createdExpense, err := handler.service.CreateExpense(internalCtx, request.ToDomain())
 	if err != nil {
-		return err // Add error handler for such cases
+		if errors.Is(err, context.DeadlineExceeded) {
+			return ctx.JSON(http.StatusRequestTimeout, dto.NewError(error_codes.ServiceTimeout.String()))
+		}
+
+		return ctx.JSON(http.StatusInternalServerError, dto.NewError(error_codes.UnprocessedError.String()))
 	}
 
 	return ctx.JSON(http.StatusCreated, dto.ResponseFromDomain(createdExpense))
 }
 
 // validateRequest validates body of the request, returning information regarding all errors
-func (handler *NewExpenseHandler) validateRequest(request dto.CreateExpenseRequest) []error {
-	var res []error
+func (handler *NewExpenseHandler) validateRequest(request *dto.CreateExpenseRequest) dto.ErrorResponse {
+	var res dto.ErrorResponse
 
 	if request.Price <= 0 {
-		res = append(res, fmt.Errorf("%s", error_codes.InvalidPrice))
+		res = res.Add(error_codes.InvalidPrice.String())
 	}
 	if len(strings.TrimSpace(request.Title)) == 0 {
-		res = append(res, fmt.Errorf("%s", error_codes.EmptyName))
+		res = res.Add(error_codes.EmptyName.String())
 	}
 
 	return res
