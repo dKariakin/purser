@@ -36,7 +36,7 @@ func TestCreateExpenseDto(t *testing.T) {
 				Id:        "1",
 				Name:      "test",
 				Price:     11,
-				CreatedAt: time.Now(),
+				CreatedAt: time.Now().Unix(),
 			}
 			expected := CreateExpenseResponse{
 				CreateExpenseRequest: CreateExpenseRequest{

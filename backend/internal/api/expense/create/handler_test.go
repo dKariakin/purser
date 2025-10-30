@@ -28,12 +28,11 @@ func TestNewExpenseHandler(t *testing.T) {
 		func(t *testing.T) {
 			t.Parallel()
 
-			now := time.Now()
 			svcResult := model.Expense{
 				Id:        "1",
 				Name:      "My expense",
 				Price:     42,
-				CreatedAt: now,
+				CreatedAt: time.Now().Unix(),
 			}
 			expected := fmt.Sprintln(`{"id":"1","price":42,"title":"My expense"}`)
 			r := strings.NewReader(`{"price":42, "title":"My expense"}`)
