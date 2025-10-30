@@ -30,9 +30,9 @@ func TestNewExpenseHandler(t *testing.T) {
 
 			now := time.Now()
 			svcResult := model.Expense{
-				Id: "1",
-				Name: "My expense",
-				Price: 42,
+				Id:        "1",
+				Name:      "My expense",
+				Price:     42,
 				CreatedAt: now,
 			}
 			expected := fmt.Sprintln(`{"id":"1","price":42,"title":"My expense"}`)

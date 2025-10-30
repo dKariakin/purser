@@ -6,7 +6,7 @@ type ErrorResponse struct {
 
 func NewError(err string) ErrorResponse {
 	return ErrorResponse{
-		Errors: []string{ err },
+		Errors: []string{err},
 	}
 }
 
