@@ -7,13 +7,13 @@ import (
 )
 
 type CreateExpenseRequest struct {
-	Price float32 `json:"price"`
-	Title string  `json:"title"`
+	Price int    `json:"price"`
+	Title string `json:"title"`
 }
 
 type CreateExpenseResponse struct {
-	CreateExpenseRequest
 	Id string `json:"id"`
+	CreateExpenseRequest
 }
 
 func (req *CreateExpenseRequest) ToDomain() model.Expense {

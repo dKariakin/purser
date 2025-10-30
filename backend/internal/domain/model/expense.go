@@ -5,6 +5,6 @@ import "time"
 type Expense struct {
 	Id        string
 	Name      string
-	Price     float32
+	Price     int
 	CreatedAt time.Time
 }

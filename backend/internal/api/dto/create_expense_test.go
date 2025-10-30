@@ -16,12 +16,12 @@ func TestCreateExpenseDto(t *testing.T) {
 			t.Parallel()
 
 			req := CreateExpenseRequest{
-				Price: 42.1,
+				Price: 421,
 				Title: " test Title",
 			}
 			expected := model.Expense{
 				Name:  "test Title",
-				Price: 42.1,
+				Price: 421,
 			}
 			actual := req.ToDomain()
 
