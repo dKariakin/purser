@@ -12,7 +12,6 @@ type Expense struct {
 	Id        string `json:"id"`
 	Name      string `json:"name"`
 	Price     int `json:"price"`
-	CreatedAt int64 `json:"createdAt"`
 }
 
 func FromDomain(e model.Expense) Expense {

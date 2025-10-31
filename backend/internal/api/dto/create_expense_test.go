@@ -2,7 +2,6 @@ package dto
 
 import (
 	"testing"
-	"time"
 
 	"github.com/dKariakin/purser/internal/domain/model"
 	"github.com/stretchr/testify/assert"
@@ -36,7 +35,6 @@ func TestCreateExpenseDto(t *testing.T) {
 				Id:        "1",
 				Name:      "test",
 				Price:     11,
-				CreatedAt: time.Now().Unix(),
 			}
 			expected := CreateExpenseResponse{
 				CreateExpenseRequest: CreateExpenseRequest{

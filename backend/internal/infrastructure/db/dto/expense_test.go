@@ -1,10 +1,8 @@
 package dto
 
 import (
-	"fmt"
 	"strings"
 	"testing"
-	"time"
 
 	"github.com/dKariakin/purser/internal/domain/model"
 	"github.com/stretchr/testify/assert"
@@ -35,15 +33,12 @@ func TestExpenseDto(t *testing.T) {
 	t.Run("When an expense DTO is converted to reader, a correct object should be returned", func(t *testing.T) {
 		t.Parallel()
 
-		now := time.Now().Unix()
 		source := Expense{
 			Id: "42",
 			Name: " test expense",
 			Price: 42,
-			CreatedAt: now,
 		}
-		j := fmt.Sprintf("{\"id\":\"42\",\"name\":\" test expense\",\"price\":42,\"createdAt\":%v}", now)
-		expected := strings.NewReader(j)
+		expected := strings.NewReader(`{"id":"42","name":" test expense","price":42}`)
 		result := source.Reader()
 
 		assert.Equal(t, expected, result)

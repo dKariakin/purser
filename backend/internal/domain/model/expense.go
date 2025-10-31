@@ -4,5 +4,4 @@ type Expense struct {
 	Id        string
 	Name      string
 	Price     int
-	CreatedAt int64
 }

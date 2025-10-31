@@ -32,7 +32,6 @@ func TestNewExpenseHandler(t *testing.T) {
 				Id:        "1",
 				Name:      "My expense",
 				Price:     42,
-				CreatedAt: time.Now().Unix(),
 			}
 			expected := fmt.Sprintln(`{"id":"1","price":42,"title":"My expense"}`)
 			r := strings.NewReader(`{"price":42, "title":"My expense"}`)
