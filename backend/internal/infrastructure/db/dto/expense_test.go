@@ -15,13 +15,13 @@ func TestExpenseDto(t *testing.T) {
 		t.Parallel()
 
 		source := model.Expense{
-			Id: "1",
-			Name: "test",
+			Id:    "1",
+			Name:  "test",
 			Price: 42,
 		}
 		expected := Expense{
-			Id: "1",
-			Name: "test",
+			Id:    "1",
+			Name:  "test",
 			Price: 42,
 		}
 
@@ -34,8 +34,8 @@ func TestExpenseDto(t *testing.T) {
 		t.Parallel()
 
 		source := Expense{
-			Id: "42",
-			Name: " test expense",
+			Id:    "42",
+			Name:  " test expense",
 			Price: 42,
 		}
 		expected := strings.NewReader(`{"id":"42","name":" test expense","price":42}`)

@@ -29,9 +29,9 @@ func TestNewExpenseHandler(t *testing.T) {
 			t.Parallel()
 
 			svcResult := model.Expense{
-				Id:        "1",
-				Name:      "My expense",
-				Price:     42,
+				Id:    "1",
+				Name:  "My expense",
+				Price: 42,
 			}
 			expected := fmt.Sprintln(`{"id":"1","price":42,"title":"My expense"}`)
 			r := strings.NewReader(`{"price":42, "title":"My expense"}`)

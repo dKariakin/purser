@@ -9,15 +9,15 @@ import (
 )
 
 type Expense struct {
-	Id        string `json:"id"`
-	Name      string `json:"name"`
-	Price     int `json:"price"`
+	Id    string `json:"id"`
+	Name  string `json:"name"`
+	Price int    `json:"price"`
 }
 
 func FromDomain(e model.Expense) Expense {
-	return Expense {
-		Id: e.Id,
-		Name: e.Name,
+	return Expense{
+		Id:    e.Id,
+		Name:  e.Name,
 		Price: e.Price,
 	}
 }

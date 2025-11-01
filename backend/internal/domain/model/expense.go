@@ -1,7 +1,7 @@
 package model
 
 type Expense struct {
-	Id        string
-	Name      string
-	Price     int
+	Id    string
+	Name  string
+	Price int
 }

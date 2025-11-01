@@ -32,9 +32,9 @@ func TestCreateExpenseDto(t *testing.T) {
 			t.Parallel()
 
 			domain := model.Expense{
-				Id:        "1",
-				Name:      "test",
-				Price:     11,
+				Id:    "1",
+				Name:  "test",
+				Price: 11,
 			}
 			expected := CreateExpenseResponse{
 				CreateExpenseRequest: CreateExpenseRequest{
